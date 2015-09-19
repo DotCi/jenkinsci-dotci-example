@@ -5,7 +5,7 @@ git-client:latest
 token-macro:latest
 
 # per https://github.com/groupon/DotCi/blob/DotCi-2.11.2/pom.xml#L215-L327
-DotCi:2.11.2
+#DotCi:2.11.2
 matrix-project:1.2
 github-api:1.68
 github-oauth:0.20
