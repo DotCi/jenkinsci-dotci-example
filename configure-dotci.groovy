@@ -65,7 +65,7 @@ println "--> configured mongodb:27017/dotci into " + env['JENKINS_HOME'] + "/com
 // config.setGithubCallbackUrl("http://CHANGE_ME.ngrok.io/githook/")
 
 config.setGithubWebUrl("https://github.com")
-config.setGithubApiUrl("https://github.com/api/v3")
+config.setGithubApiUrl("https://api.github.com")
 config.setGithubClientID("CHANGE_ME")
 config.setGithubClientSecret("CHANGE_ME")
 config.setPrivateRepoSupport(false)
@@ -77,7 +77,7 @@ println "--> configured https://github.com/settings/applications/CHANGE_ME into 
 // github.com => Account settings => Org => Applications => Register new application => callback url:https://xx.xx.xx.xx:port/securityRealm/finishLogin //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // https://github.com/jenkinsci/github-oauth-plugin/blob/github-oauth-0.20/src/main/java/org/jenkinsci/plugins/GithubSecurityRealm.java#L115-L116
-instance.setSecurityRealm( new GithubSecurityRealm( "https://github.com", "https://github.com/api/v3", "CHANGE_ME_CLIENT_ID", "CHANGE_ME_CLIENT_SECRET"))
+instance.setSecurityRealm( new GithubSecurityRealm( "https://github.com", "https://api.github.com", "CHANGE_ME_CLIENT_ID", "CHANGE_ME_CLIENT_SECRET"))
 instance.save()
 println "--> configured securityRealm to https://github.com/settings/applications/CHANGE_ME into " + env['JENKINS_HOME'] + "/config.xml"
 
