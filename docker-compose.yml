@@ -1,3 +1,18 @@
+mailman:
+  image: catatnight/postfix
+  environment:
+    maildomain: "mail.example.com"
+    smtp_user: "user:password"
+  ports:
+    - "25:25"
+
+mongodb:
+  image: mongo:3
+  ports:
+    - "27017"
+  volumes:
+    - /data/db
+
 master:
   build: .
   environment:
@@ -7,3 +22,6 @@ master:
     - "80:8080"
   volumes:
     - /var/jenkins_home
+  links:
+    - mailman
+    - mongodb
