@@ -1,1 +1,28 @@
-github-api:latest
+# list of plugins required by dotci to install from https://updates.jenkins-ci.org/download/plugins
+scm-api:0.2
+git:latest
+git-client:latest
+token-macro:latest
+
+# per https://github.com/groupon/DotCi/blob/DotCi-2.11.2/pom.xml#L215-L327
+DotCi:2.11.2
+matrix-project:1.2
+github-api:1.68
+github-oauth:0.20
+rebuild:1.25
+
+# per https://github.com/groupon/DotCi-Plugins-Starter-Pack/blob/DotCi-Plugins-Starter-Pack-1.1.2/pom.xml#L67-L142
+DotCi-Plugins-Starter-Pack:1.1.2
+ansicolor:0.3.1
+build-timeout:1.14
+checkstyle:3.39
+findbugs:4.51
+jacoco:1.0.14
+pmd:3.38
+analysis-core:1.55
+junit:1.6
+tap:1.10
+cobertura:1.9.3
+
+# optional demo to create your own language template - https://github.com/groupon/DotCi-Fig-template
+DotCi-Fig-template:1.0.4
