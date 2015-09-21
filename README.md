@@ -13,6 +13,12 @@ This sample project is meant to be forked and customized to your needs. It detai
 
 ### [PreRequisites](http://groupon.github.io/DotCi/installation/PreRequisites.html)
 
+#### Mongo DB
+
+Install [mongodb](https://www.mongodb.org/) in a location accessible to your Jenkins instance.
+
+#### Github Applications
+
 Register an [OAuth
 Application](https://github.com/settings/applications/new) with GitHub
 to generate __Client ID__ and __Client Secret__. The __Authorization callback URL__ needs to be `http://<YOUR-JENKINS-URL>/dotci/finishLogin`
@@ -74,11 +80,3 @@ Compose is a tool for defining and running multi-container applications with Doc
   * doc: http://docs.docker.com/mac/started/
   * ref: https://docs.docker.com/reference/builder/
   * cli: https://docs.docker.com/reference/run/ - PLEASE use ``docker-compose up`` instead ``docker run``.
-
-### MongoDB
- * Groupon jenkins master has mongo client so you can gain access through that to test mongo connectivity and data
-```
-docker images -a | grep _master
-docker exec -it xxx_master_1 bash
-mongo mongodb:27017/dotci
-```
