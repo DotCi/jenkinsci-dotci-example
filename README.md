@@ -2,20 +2,31 @@
 
 ### Background
 
-This repo is about creating your own jenkins + [DotCi](http://groupon.github.io/DotCi/).
+This repo is about creating your own jenkins with [DotCi](http://groupon.github.io/DotCi/). Only the github org admin of a repo can create __New DotCi job__ for its org/repo. If you are __NOT__ the admin, you can still fork then create a new job for your forked repo. Then you can pilot test your changes to see its green build result before generating a PR back into the original org/repo. Explore the following options with your existing DotCi build system before creating an entire new DotCi build system.
 
-Only the github org admin of a repo can create New DotCi job for that org/repo. If you are __NOT__ the admin, you can still fork then create a new DotCi job for your forked repo. Then you can pilot test your changes to see its DotCi build before generating a PR back into the original org/repo. Explore these options before exploring creating another entire DotCi build system.
+### Summary
 
-### Setup
+This sample project is meant to be forked and customized to your needs. It details basic configurations and list of jenkins plugins depended by [DotCi](https://github.com/groupon/DotCi). 
 
- 1. github.com => Account settings => Org => Applications => Register new application => callback url:http://xx.xx.xx.xx:port/dotci/finishLogin
- 2. github.com => Account settings => Org => Applications => Register new application => callback url:https://xx.xx.xx.xx:port/securityRealm/finishLogin
- 3. edit configure-dotci.groovy based on above modifications
- 4. use https://ngrok.com to expose your localhost docker ip/port behind a NAT or firewall to the internet.
-``
+### [PreRequisites](http://groupon.github.io/DotCi/installation/PreRequisites.html)
+
+Register an [OAuth
+Application](https://github.com/settings/applications/new) with GitHub
+to generate __Client ID__ and __Client Secret__. The __Authorization callback URL__ needs to be `http://<YOUR-JENKINS-URL>/dotci/finishLogin`
+
+Register a separate [OAuth
+Application](https://github.com/settings/applications/new) with GitHub
+to generate __Client ID__ and __Client Secret__. The __Authorization callback URL__ needs to be `http://<YOUR-JENKINS-URL>/securityRealm/finishLogin`. This will later be used in conjuction to enable  [Matrix-based+security](https://wiki.jenkins-ci.org/display/JENKINS/Matrix-based+security).
+
+[configure-dotci.groovy](configure-dotci.groovy) is a sample configuration using [Jenkins+Script+Console](https://wiki.jenkins-ci.org/display/JENKINS/Jenkins+Script+Console) to apply both values above and more.
+
+#### [Ngrok](https://ngrok.com) for local development
+The build setup for `https://github.com/<ORG>/<REPO>/settings/hooks` may not be able to reach your local  `http://<YOUR-JENKINS-URL>/githook`. Therefore, install [ngrok](https://ngrok.com), a tool to secure introspectable tunnels to localhost. Then commits to the repo will be able to trigger a new build for its corresponding `http://<YOUR-JENKINS-URL>/job/<ORG>/job/<REPO>`
+```
 curl -sH 'Accept-encoding: gzip' https://dl.ngrok.com/ngrok_2.0.19_darwin_amd64.zip | jar x && chmod 755 ./ngrok
-./ngrok http `docker-machine ip dev`:80
-``
+sudo mv ./ngrok /usr/local/bin/
+ngrok http <IP>:<PORT>
+```
 
 ### Build / Run
 ```
@@ -38,29 +49,27 @@ docker-compose stop
 docker-compose rm -vf
 ```
 
-### Configuration Files
+### Files
 
-#### docker-compose.yml
+#### Groovy scripts
+ * [configure-dotci.groovy](configure-dotci.groovy) is a dotci configuration using [Jenkins+Script+Console](https://wiki.jenkins-ci.org/display/JENKINS/Jenkins+Script+Console) to __CUSTOMIZE__ your settings.
+ * [configure-jenkins.groovy](configure-jenkins.groovy) sets the master executor to zero. This forces use of jenkins slave to build and unburdens master. Segregate frequent slave customization for build needs from master customization that may require jenkins restart.
+
+#### [plugins.txt](plugins.txt)
+list of jenkins plugins that dotci depends to install during creation of image.
+ * To organize many plugins, break the list out to multiple files. Edit Dockerfile to add/run those. This improves Docker build cache to only re-download frequent changes if that file is last one in list.
+ * see https://updates.jenkins-ci.org/download/plugins/
+
+#### [docker-compose.yml](docker-compose.yml)
 Compose is a tool for defining and running multi-container applications with Docker. With Compose, you define a multi-container application in a single file, then spin your application up in a single command.
   * doc: https://docs.docker.com/compose/
   * ref: https://docs.docker.com/compose/yml/
   * cli: https://docs.docker.com/compose/reference/
 
-#### Dockerfile
+#### [Dockerfile](Dockerfile)
   * doc: http://docs.docker.com/mac/started/
   * ref: https://docs.docker.com/reference/builder/
   * cli: https://docs.docker.com/reference/run/ - PLEASE use ``docker-compose up`` instead ``docker run``.
-
-#### plugins.txt
-list of jenkins plugins that dotci depends to install during creation of image.
- * To organize many plugins, break the list out to multiple files. Edit Dockerfile to add/run those. This improves Docker build cache to only re-download frequent changes if that file is last one in list.
-  * see https://updates.jenkins-ci.org/download/plugins/
-
-#### *.groovy
-Set of files to include during creation of image. These groorvy scripts will then be invoked after jenkins startup. You can add or modify more to your needs.
-  * doc: https://wiki.jenkins-ci.org/display/JENKINS/Jenkins+Script+Console
-  * configure-jenkins.groovy - DO NOT set master executor > 0. Zero forces use of slave so master is not burden with builds. Best practice to segregate slave frequent customization for build needs from actual jenkins master coordinating the display of its result.
-  * configure-dotci.groovy - an outline of DotCi required setting that  ===> YOU MUST CUSTOMIZE <=====
 
 ### MongoDB
  * Groupon jenkins master has mongo client so you can gain access through that to test mongo connectivity and data
