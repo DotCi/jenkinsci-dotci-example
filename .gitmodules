@@ -1,3 +1,6 @@
 [submodule "jenkinsci-slave"]
 	path = jenkinsci-slave
 	url = https://github.com/DotCi/jenkinsci-slave
+[submodule "jenkinsci"]
+	path = jenkinsci
+	url = https://github.com/DotCi/jenkinsci

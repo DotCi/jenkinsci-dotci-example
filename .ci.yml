@@ -14,6 +14,7 @@ build:
   before:
     - git submodule init
     - git submodule update
+    - docker build -t jenkins:1.628 jenkinsci
 
     # cache
     - 'for file in `find . -type f -not -path "./.git/*"`; do touch -d "\$(git rev-list -n 1 HEAD \$file | xargs git show -s --format=%ai)" \$file; done'

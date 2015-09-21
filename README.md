@@ -6,7 +6,10 @@ This repo is about creating your own jenkins with [DotCi](http://groupon.github.
 
 ### Summary
 
-This sample project is meant to be forked and customized to your needs. It details basic configurations and list of jenkins plugins depended by [DotCi](https://github.com/groupon/DotCi). 
+This sample project is meant to be forked and customized to your needs. It details basic configurations and list of jenkins plugins depended by [DotCi](https://github.com/groupon/DotCi). There are two git submodules references in this repository that require ``git submodules init`` and ``git submodules update`` to be present. You can fork and customize those two additional repositories __OR__ in-line it directly. If you do choose to remove these git submodules,  I recommend ``docker publish`` and reference those _image:_ within _[docker-compose.yml](docker-compose.yml)_
+
+ * [https://github.com/DotCi/jenkinsci](https://github.com/DotCi/jenkinsci) is modified [https://github.com/jenkinsci/docker](https://github.com/jenkinsci/docker) to control [jenkins version](https://jenkins-ci.org/changelog)
+ * [https://github.com/DotCi/jenkinsci-slave](https://github.com/DotCi/jenkinsci-slave) definition
 
 ### [PreRequisites](http://groupon.github.io/DotCi/installation/PreRequisites.html)
 
@@ -30,6 +33,7 @@ ngrok http <IP>:<PORT>
 
 ### Build / Run
 ```
+docker build -t jenkins:1.628 jenkinsci
 docker-compose build
 docker-compose up -d
 ```
