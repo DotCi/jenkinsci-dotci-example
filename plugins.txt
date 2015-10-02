@@ -5,7 +5,7 @@ git-client:latest
 token-macro:latest
 
 # per https://github.com/groupon/DotCi/blob/DotCi-2.11.2/pom.xml#L215-L327
-#DotCi:2.11.2
+DotCi:2.12.3
 matrix-project:1.2
 github-api:1.68
 github-oauth:0.20
@@ -24,5 +24,4 @@ junit:1.6
 tap:1.10
 cobertura:1.9.3
 
-# optional demo to create your own language template - https://github.com/groupon/DotCi-Fig-template
-DotCi-Fig-template:1.0.4
+# demo to create your own language template - https://github.com/groupon/DotCi-Fig-template
