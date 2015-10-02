@@ -20,11 +20,17 @@ master:
   ports:
     - "50000:50000"
     - "80:8080"
-  volumes:
-    - /var/jenkins_home
+  volumes_from:
+    - config
   links:
     - mailman
     - mongodb
+
+config:
+  build: .
+  entrypoint: /bin/echo
+  volumes:
+    - /var/jenkins_home
 
 slave:
   build: jenkinsci-slave/ubuntu/docker
