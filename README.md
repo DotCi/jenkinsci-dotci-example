@@ -39,7 +39,7 @@ ngrok http <IP>:<PORT>
 
 ### Build / Run
 ```
-docker build -t jenkins:1.628 jenkinsci
+docker build -t jenkins:1.631 jenkinsci
 docker-compose build
 docker-compose up -d
 ```
