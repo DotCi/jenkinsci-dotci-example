@@ -1,27 +1,41 @@
 # list of plugins required by dotci to install from https://updates.jenkins-ci.org/download/plugins
 scm-api:0.2
-git:latest
-git-client:latest
-token-macro:latest
+git:2.2.2
+git-client:1.9.1
+token-macro:1.10
 
 # per https://github.com/groupon/DotCi/blob/DotCi-2.11.2/pom.xml#L215-L327
-DotCi:2.12.3
+DotCi:2.20.1
 matrix-project:1.2
-github-api:1.68
-github-oauth:0.20
+github-api:1.69
+github-oauth:0.22.2
 rebuild:1.25
 
-# per https://github.com/groupon/DotCi-Plugins-Starter-Pack/blob/DotCi-Plugins-Starter-Pack-1.1.2/pom.xml#L67-L142
-DotCi-Plugins-Starter-Pack:1.1.2
+# https://github.com/DotCi/DotCiInstallPackages/blob/DotCiInstallPackages-1.1.1/pom.xml
+DotCiInstallPackages:1.1.1
+
+# https://github.com/DotCi/DotCiPipelineViewer/blob/master/pom.xml
+#DotCiPipelineViewer:
+#build-pipeline-plugin:1.4.8
+#build-user-vars-plugin:
+#cucumber-testresult-plugin:
+#log-parser:
+#parameterized-trigger:
+#plot:
+
+# https://github.com/groupon/DotCi-Plugins-Starter-Pack/blob/DotCi-Plugins-Starter-Pack-1.6.0/pom.xml#L67-L151
+DotCi-Plugins-Starter-Pack:1.6.0
 ansicolor:0.3.1
 build-timeout:1.14
-checkstyle:3.39
-findbugs:4.51
-jacoco:1.0.14
-pmd:3.38
-analysis-core:1.55
-junit:1.6
+checkstyle:3.43
+findbugs:4.62
+jacoco:1.0.19
+pmd:3.42
+analysis-core:1.73
+junit:1.8
 tap:1.10
 cobertura:1.9.3
+analysis-collector:1.45
+analysis-core:1.74
 
 # demo to create your own language template - https://github.com/groupon/DotCi-Fig-template
