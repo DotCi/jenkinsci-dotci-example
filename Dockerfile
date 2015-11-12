@@ -1,4 +1,4 @@
-FROM jenkins:1.631
+FROM jenkins:1.638
 
 # list of jenkins plugins to install
 COPY plugins.txt /usr/share/jenkins/ref/
