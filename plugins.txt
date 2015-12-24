@@ -11,8 +11,8 @@ github-api:1.69
 github-oauth:0.22.2
 rebuild:1.25
 
-# https://github.com/DotCi/DotCiInstallPackages/blob/DotCiInstallPackages-1.1.1/pom.xml
-DotCiInstallPackages:1.1.1
+# https://github.com/DotCi/DotCiInstallPackages/blob/DotCi-InstallPackages-1.2.0/pom.xml
+DotCi-InstallPackages:1.2.0
 
 # https://github.com/DotCi/DotCiPipelineViewer/blob/master/pom.xml
 #DotCiPipelineViewer:
