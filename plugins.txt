@@ -4,8 +4,8 @@ git:2.2.2
 git-client:1.9.1
 token-macro:1.10
 
-# per https://github.com/groupon/DotCi/blob/DotCi-2.11.2/pom.xml#L215-L327
-DotCi:2.20.1
+# per https://github.com/groupon/DotCi/blob/DotCi-2.26.0/pom.xml#L215-L327
+DotCi:2.26.0
 matrix-project:1.2
 github-api:1.69
 github-oauth:0.22.2
