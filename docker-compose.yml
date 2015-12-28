@@ -1,18 +1,3 @@
-mailman:
-  image: catatnight/postfix
-  environment:
-    maildomain: "mail.example.com"
-    smtp_user: "user:password"
-  ports:
-    - "25:25"
-
-mongodb:
-  image: mongo:3
-  ports:
-    - "27017"
-  volumes:
-    - /data/db
-
 master:
   build: .
   environment:
@@ -31,17 +16,3 @@ config:
   entrypoint: /bin/echo
   volumes:
     - /var/jenkins_home
-
-slave:
-  build: jenkinsci-slave/ubuntu/docker
-  environment:
-    master: "http://master:8080"
-    slave: "docker-1"
-    # Docker does not support multiple inheritance. The environment and volume flags below install /usr/local/bin/docker
-    # without having to rewrite Dockerfile to append https://registry.hub.docker.com/u/library/docker-dev
-    DOCKER_HOST: "unix:///docker.sock"
-  volumes:
-    - /var/run/docker.sock:/docker.sock
-    - /usr/local/bin/docker:/usr/local/bin/docker
-  links:
-    - master
