@@ -3,8 +3,8 @@ master:
   environment:
     JAVA_OPTS: "-Djava.awt.headless=true"
   ports:
-    - "50000:50000"
-    - "80:8080"
+    - "50000"
+    - "8080"
   volumes_from:
     - config
   links:

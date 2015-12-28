@@ -1,0 +1,12 @@
+mailman:
+  ports:
+    - "25"
+
+mongodb:
+  ports:
+    - "27017"
+
+master:
+  ports:
+    - "45734"
+    - "8080"

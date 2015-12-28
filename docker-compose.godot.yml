@@ -1,0 +1,36 @@
+master:
+  build: .
+  environment:
+    JAVA_OPTS: "-Djava.awt.headless=true"
+  ports:
+    - "50000"
+    - "8080"
+  volumes_from:
+    - config
+  links:
+    - mailman
+    - mongodb
+
+config:
+  build: .
+  entrypoint: /bin/echo
+  volumes:
+    - /var/jenkins_home
+
+mailman:
+  image: catatnight/postfix
+  environment:
+    maildomain: "mail.example.com"
+    smtp_user: "user:password"
+  ports:
+    - "25"
+
+mongodb:
+  image: mongo:3
+  ports:
+    - "27017"
+  volumes:
+    - /data/db
+
+slave:
+  build: jenkinsci-slave/ubuntu/docker

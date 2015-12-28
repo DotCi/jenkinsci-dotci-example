@@ -1,61 +1,16 @@
-environment:
-  language: java
-  vars:
-    DOCKER_IMAGE: '<% out<< JOB_NAME.toLowerCase().replaceAll('-','_') %>'
-    DOCKER_TAG: '<% if (DOTCI_TAG) { out<< DOTCI_TAG.replaceAll(/[^A-Za-z0-9._]/,"").toLowerCase() } else { %>latest<% } %>'
-    BUILDTAG: '<% out << BUILD_TAG.replaceAll(/[^A-Za-z0-9]/,"").toLowerCase() %>'
+docker-compose-file: docker-compose.godot.yml
+# https://github.com/groupon/DotCi/issues/211
+#  - docker-compose.yml
+#  - docker-compose.override.yml
+#  - docker-compose.dotci.yml
 
-build:
-  <% if ( DOTCI_PULL_REQUEST ) { %>
-  skip: true
-  <% } %>
-  info:
-    - docker --version
-  before:
-    - git submodule init
-    - git submodule update
-    - docker build -t jenkins:1.628 jenkinsci
+<% if ( DOTCI_PULL_REQUEST ) { %>
+skip: true
+<% } %>
 
-    # cache
-    - 'for file in `find . -type f -not -path "./.git/*"`; do touch -d "\$(git rev-list -n 1 HEAD \$file | xargs git show -s --format=%ai)" \$file; done'
+#before_run: 'for file in `find . -type f -not -path "./.git/*"`; do touch -d "\$(git rev-list -n 1 HEAD \$file | xargs git show -s --format=%ai)" \$file; done'
 
-    # ci ONLY avoid tightly bound expose port to prevent collision for parallel builds
-    - sed -i 's/45734:45734/45734/' docker-compose.yml
-    - sed -i 's/80:8080/8080/' docker-compose.yml
-    - sed -i 's/25:25/25/' docker-compose.yml
+run:
+  master: '--daemon && sleep 180 && docker ps -a | grep <% out<< JOB_NAME.toLowerCase().replaceAll('[^0-9a-z]','') %><% out<< BUILD_NUMBER %>'
 
-    # noticed docker container network aggregation in /etc/hosts via ``docker exec -it jenkinscidotciexample_bar_1 grep master /etc/hosts``
-    # this re-setting is more reliable since master may have been defined in multiple projects but https://docs.docker.com/compose/yml/#links only once
-    - sed -i "s,http://master,http://\${BUILDTAG}_master_1,g" docker-compose.yml
-
-  run:
-    # update
-    - find . -type f -name Dockerfile -exec grep "^FROM " {} \\; | sort | uniq | awk '{system("docker pull " \$2)}'
-    - docker-compose pull
-
-    # build
-    - docker-compose -p ${BUILDTAG} build # --no-cache
-
-    # teardown / cleanup
-    - trap "docker-compose -p ${BUILDTAG} stop; docker-compose -p ${BUILDTAG} rm --force -v; exit" EXIT HUP INT QUIT PIPE TERM
-
-    # run
-    - docker-compose -p ${BUILDTAG} up -d
-    - sleep 120
-
-    # log
-    - docker logs ${BUILDTAG}_master_1
-
-    # ps - https://github.com/docker/fig/issues/683
-    - DOCKER_CONTAINER=`docker-compose -p $BUILDTAG ps -q master | cut -c -12`
-    - docker ps -a --filter 'exited=0' | grep $DOCKER_CONTAINER; EXIT_CODE=\$?
-    - '[ $EXIT_CODE -eq 0 ] || exit $EXIT_CODE'
-
-    # publish
-    <% if ( DOTCI_TAG ) { %>
-    - docker tag ${BUILDTAG}_master ${DOCKER_IMAGE}:${DOCKER_TAG}
-    - docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
-
-    - docker tag ${BUILDTAG}_master ${DOCKER_IMAGE}:latest
-    - docker push ${DOCKER_IMAGE}:latest
-    <% } %>
+after_each: 'docker rm -vf <% out<< JOB_NAME.toLowerCase().replaceAll('[^0-9a-z]','') %><% out<< BUILD_NUMBER %>_master_run_1'
