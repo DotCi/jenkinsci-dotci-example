@@ -4,8 +4,8 @@ git:2.2.2
 git-client:1.9.1
 token-macro:1.10
 
-# per https://github.com/groupon/DotCi/blob/DotCi-2.26.0/pom.xml#L215-L327
-DotCi:2.26.0
+# per https://github.com/groupon/DotCi/blob/DotCi-2.27.0/pom.xml#L215-L327
+DotCi:2.27.0
 matrix-project:1.2
 github-api:1.69
 github-oauth:0.22.2
@@ -26,8 +26,8 @@ DotCi-Fig-template:1.1.0
 #parameterized-trigger:
 #plot:
 
-# https://github.com/groupon/DotCi-Plugins-Starter-Pack/blob/DotCi-Plugins-Starter-Pack-1.6.0/pom.xml#L67-L151
-DotCi-Plugins-Starter-Pack:1.6.0
+# https://github.com/groupon/DotCi-Plugins-Starter-Pack/blob/DotCi-Plugins-Starter-Pack-1.7.1/pom.xml#L67-L151
+DotCi-Plugins-Starter-Pack:1.7.1
 ansicolor:0.3.1
 build-timeout:1.14
 checkstyle:3.43
@@ -40,4 +40,3 @@ tap:1.10
 cobertura:1.9.3
 analysis-collector:1.45
 analysis-core:1.74
-
