@@ -1,13 +1,13 @@
 # list of plugins required by dotci to install from https://updates.jenkins-ci.org/download/plugins
-scm-api:0.2
-git:2.2.2
-git-client:1.9.1
-token-macro:1.10
+scm-api:1.0
+git:2.4.1
+git-client:1.19.1
+token-macro:1.12.1
 
 # per https://github.com/groupon/DotCi/blob/DotCi-2.27.0/pom.xml#L215-L327
 DotCi:2.27.0
-matrix-project:1.2
-github-api:1.69
+matrix-project:1.6
+github-api:1.71
 github-oauth:0.22.2
 rebuild:1.25
 
