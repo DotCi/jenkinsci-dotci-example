@@ -14,9 +14,6 @@ rebuild:1.25
 # https://github.com/DotCi/DotCiInstallPackages/blob/DotCi-InstallPackages-1.2.0/pom.xml
 DotCi-InstallPackages:1.2.0
 
-# https://github.com/DotCi/DotCi-Fig-template/blob/DotCi-Fig-template-1.1.0/pom.xml
-DotCi-Fig-template:1.1.0
-
 # https://github.com/DotCi/DotCiPipelineViewer/blob/master/pom.xml
 #DotCiPipelineViewer:
 #build-pipeline-plugin:1.4.8
