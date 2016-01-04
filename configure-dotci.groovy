@@ -15,7 +15,7 @@ def env = System.getenv()
 // generic //
 /////////////
 location = jenkins.model.JenkinsLocationConfiguration.get()
-location.setUrl("http://CHANGE_ME/")
+// comment out for default otherwise - location.setUrl("http://CHANGE_ME/")
 location.setAdminAddress("CHANGE_ME@xxx.com")
 
 
@@ -23,8 +23,9 @@ location.setAdminAddress("CHANGE_ME@xxx.com")
 // build type //
 ////////////////
 config.setLabel("docker")
-// config.setDefaultBuildType("com.groupon.jenkins.buildtype.dockercompose.DockerComposeBuild")
-config.setDefaultBuildType("com.groupon.jenkins.buildtype.install_packages.InstallPackagesBuild")
+config.setDefaultBuildType("com.groupon.jenkins.buildtype.dockercompose.DockerComposeBuild")
+com.groupon.jenkins.buildtype.dockercompose.GlobalConfiguration.get().setCloneUrlTemplate("git@<DOMAIN>:<ORG>/<REPO>.git")
+// config.setDefaultBuildType("com.groupon.jenkins.buildtype.install_packages.InstallPackagesBuild")
 config.setFromEmailAddress("CHANGE_ME@xxx.com")
 config.save()
 println "--> configured the default build type and jenkins label for new DotCi projects into " + env['JENKINS_HOME'] + "/com.groupon.jenkins.SetupConfig.xml"
