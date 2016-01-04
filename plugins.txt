@@ -24,7 +24,7 @@ DotCi-InstallPackages:1.2.0
 #plot:
 
 # https://github.com/groupon/DotCi-Plugins-Starter-Pack/blob/DotCi-Plugins-Starter-Pack-1.7.1/pom.xml#L67-L151
-DotCi-Plugins-Starter-Pack:1.7.1
+DotCi-Plugins-Starter-Pack:1.6.2
 ansicolor:0.3.1
 build-timeout:1.14
 checkstyle:3.43
