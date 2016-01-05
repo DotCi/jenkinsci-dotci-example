@@ -24,8 +24,9 @@ location.setAdminAddress("CHANGE_ME@xxx.com")
 ////////////////
 config.setLabel("docker")
 config.setDefaultBuildType("com.groupon.jenkins.buildtype.dockercompose.DockerComposeBuild")
-com.groupon.jenkins.buildtype.dockercompose.GlobalConfiguration.get().setCloneUrlTemplate("git@<DOMAIN>:<ORG>/<REPO>.git")
 // config.setDefaultBuildType("com.groupon.jenkins.buildtype.install_packages.InstallPackagesBuild")
+com.groupon.jenkins.buildtype.dockercompose.GlobalConfiguration.get().setCloneUrlTemplate("https://<DOMAIN>/<ORG>/<REPO>.git")
+// JNLP slave require ssh key to github repo - com.groupon.jenkins.buildtype.dockercompose.GlobalConfiguration.get().setCloneUrlTemplate("git@<DOMAIN>:<ORG>/<REPO>.git")
 config.setFromEmailAddress("CHANGE_ME@xxx.com")
 config.save()
 println "--> configured the default build type and jenkins label for new DotCi projects into " + env['JENKINS_HOME'] + "/com.groupon.jenkins.SetupConfig.xml"
