@@ -37,5 +37,11 @@ slave:
   environment:
     master: "http://master:8080"
     slave: "docker-1"
+    # Docker does not support multiple inheritance. The environment and volume flags below install /usr/local/bin/docker
+    # without having to rewrite Dockerfile to append https://registry.hub.docker.com/u/library/docker-dev
+    DOCKER_HOST: "unix:///docker.sock"
+  volumes:
+    - /var/run/docker.sock:/docker.sock
+    - /usr/local/bin/docker:/usr/local/bin/docker
   links:
     - master
