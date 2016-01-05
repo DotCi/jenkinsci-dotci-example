@@ -20,3 +20,8 @@ mongodb:
 
 slave:
   build: jenkinsci-slave/ubuntu/docker
+  environment:
+    master: "http://master:8080"
+    slave: "docker-1"
+  links:
+    - master
