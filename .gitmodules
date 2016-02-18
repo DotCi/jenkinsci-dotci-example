@@ -4,4 +4,4 @@
 [submodule "jenkinsci"]
 	path = jenkinsci
 	url = https://github.com/DotCi/jenkinsci
-	branch = 1.644
+	branch = 1.648

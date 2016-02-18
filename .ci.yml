@@ -8,7 +8,7 @@ docker-compose-file: docker-compose.godot.yml
 skip: true
 <% } %>
 
-before_run: 'git submodule init && git submodule update && docker build -t jenkins:1.644 jenkinsci'
+before_run: 'git submodule init && git submodule update && docker build -t jenkins:1.648 jenkinsci'
 #before_run: 'for file in `find . -type f -not -path "./.git/*"`; do touch -d "\$(git rev-list -n 1 HEAD \$file | xargs git show -s --format=%ai)" \$file; done'
 
 run:
