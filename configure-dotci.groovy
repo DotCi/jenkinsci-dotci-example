@@ -19,6 +19,13 @@ location = jenkins.model.JenkinsLocationConfiguration.get()
 location.setAdminAddress("CHANGE_ME@xxx.com")
 
 
+////////////////////
+// docker publish //
+////////////////////
+// https://github.com/DotCi/DotCi-DockerPublish/commits/DotCi-DockerPublish-1.0.2 does not yet support docker login
+com.groupon.jenkins.DockerComposeDotCi.DockerPublishConfiguration.get().setRegistryHost("CHANGE_ME")
+
+
 ////////////////
 // build type //
 ////////////////
